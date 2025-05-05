@@ -10,4 +10,9 @@ class TripController extends Controller
     {
         return view('carpool.index');
     }
+
+    public function show()
+    {
+        return view('carpool.show');
+    }
 }

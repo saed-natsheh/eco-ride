@@ -14,7 +14,6 @@
             </div>
         </div>
     </section>
-
     <section id="search">
         <div class="container py-5">
             <h2 class="mb-4 text-center ecoride-color">trouver du covoiturage</h2>
@@ -35,6 +34,36 @@
                     <button type="submit" class="btn btn-success px-4">Rechercher</button>
                 </div>
             </form>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row pb-5 justify-content-md-center">
+                <div class="col-sm mb-5">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/card1.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Ville de départ</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm mb-5">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/card2.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Ville d'arrivée</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm mb-5">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/img/card3.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Date de départ</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
