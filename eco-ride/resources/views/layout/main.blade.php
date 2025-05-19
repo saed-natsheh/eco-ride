@@ -67,6 +67,10 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link mx-2">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/register-onboarding') }}" class="nav-link mx-2">immatriculation du
+                                conducteur</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
