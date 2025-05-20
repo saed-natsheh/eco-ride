@@ -5,18 +5,18 @@
     <section id="search">
         <div class="container py-5 card mb-4 mt-4">
             <h2 class="mb-4 text-center ecoride-color">trouver du covoiturage</h2>
-            <form class="row g-3 justify-content-center">
+            <form class="row g-3 justify-content-center" method="GET" action="{{ route('carpools.index') }}">
                 <div class="col-md-4">
-                    <label for="startCity" class="form-label ">Ville de départ</label>
-                    <input type="text" class="form-control" id="startCity" placeholder="Ex: Paris">
+                    <label class="form-label">Ville de départ</label>
+                    <input type="text" name="from" value="{{ $filters['from'] ?? '' }}" class="form-control">
                 </div>
                 <div class="col-md-4">
-                    <label for="endCity" class="form-label">Ville d'arrivée</label>
-                    <input type="text" class="form-control" id="endCity" placeholder="Ex: Lyon">
+                    <label class="form-label">Ville d'arrivée</label>
+                    <input type="text" name="to" value="{{ $filters['to'] ?? '' }}" class="form-control">
                 </div>
                 <div class="col-md-4">
-                    <label for="travelDate" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="travelDate">
+                    <label class="form-label">Date</label>
+                    <input type="date" name="date" value="{{ $filters['date'] ?? '' }}" class="form-control">
                 </div>
                 <div class="col-12 text-center pt-3">
                     <button type="submit" class="btn btn-success px-4">Rechercher</button>
@@ -77,50 +77,34 @@
             <div class="col-md-9">
                 <h2 class="mb-4 text-success">Résultats de la recherche</h2>
                 <div class="row row-cols-1 g-4">
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-body d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets/img/driver.png') }}" class="rounded-circle me-3" width="60"
-                                        height="60">
-                                    <div>
-                                        <h6>Saed Alnatsheh</h6>
-                                        <small class="text-muted">⭐ 5 notes</small><br>
-                                        <small>2 siège restant</small>
+                    @foreach($trips as $trip)
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset('assets/img/driver.png') }}" class="rounded-circle me-3" width="60"
+                                            height="60">
+                                        <div>
+                                            <h6>{{ $trip->user->name }}</h6>
+                                            <small class="text-muted">⭐ 5 notes</small><br>
+                                            <small>{{ $trip->available_seats }} siège restant</small>
+                                        </div>
                                     </div>
+                                    <div class="text-center">
+                                        <h6 class="text-success">€{{ $trip->price }}</h6>
+                                        <small class="mb-0">{{ $trip->departure_time }} → {{ $trip->arrival_time }}</small><br>
+                                        <small>{{ $trip->departure }} to {{ $trip->arrival }}</small><br>
+                                        @if($trip->is_eco)
+                                            <small class="badge bg-success mt-1">Écologique</small>
+                                        @endif
+                                    </div>
+                                    <a href="{{ route('trip.show', $trip->id) }}"
+                                        class="btn btn-outline-primary ecoride-btn">Détails</a>
                                 </div>
-                                <div class="text-center">
-                                    <h6 class="text-success">€12</h6>
-                                    <small class="mb-0">10:00 AM → 12:30 PM</small><br>
-                                    <small>orly to caen</small><br>
-                                    <small class="badge bg-success mt-1">Écologique</small>
-                                </div>
-                                <a href="#" class="btn btn-outline-primary ecoride-btn">Détails</a>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-body d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets/img/driver.png') }}" class="rounded-circle me-3" width="60"
-                                        height="60">
-                                    <div>
-                                        <h6>Assad Alnatsheh</h6>
-                                        <small class="text-muted">⭐ 3 notes</small><br>
-                                        <small>1 siège restant</small>
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <h6 class="text-success">€15</h6>
-                                    <small class="mb-0">10:00 AM → 12:15 PM</small><br>
-                                    <small>orly to caen</small><br>
-                                </div>
-                                <a href="#" class="btn btn-outline-primary ecoride-btn">Détails</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

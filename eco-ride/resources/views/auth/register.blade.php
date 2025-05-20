@@ -1,31 +1,56 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-        <div class="col-md-6 col-lg-5 shadow p-4 rounded ecocard">
-            <h2 class="text-success text-center mb-4">Inscrivez-vous à EcoRide</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Nom d'utilisateur:</label>
-                    <input type="text" id="username" name="username" class="form-control" required>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4>Create Account</h4>
+                    </div>
+                    <div class="card-body">
+                        @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="mb-0">
+                                    @foreach($errors->all() as $err)
+                                        <li>{{ $err }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="name">Full Name</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email">Email Address</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Confirm Password</label>
+                                <input type="password" name="password_confirmation" class="form-control" required>
+                            </div>
+
+                            <button class="btn btn-primary w-100">Register</button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            Already have an account? <a href="{{ url('/login') }}">Login</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Adresse email:</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Mot de passe (min 8 caractères):</label>
-                    <input type="password" id="password" name="password" class="form-control" required minlength="8">
-                </div>
-                <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Confirmez le mot de passe:</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
-                        required>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-success">Inscription</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 @endsection

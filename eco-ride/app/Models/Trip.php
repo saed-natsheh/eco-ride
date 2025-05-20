@@ -29,4 +29,9 @@ class Trip extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function participants()
+    {
+        return $this->belongsToMany(User::class, 'trip_user')->withTimestamps();
+    }
 }

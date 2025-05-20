@@ -61,4 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Trip::class);
     }
+
+    public function joinedTrips()
+    {
+        return $this->belongsToMany(Trip::class, 'trip_user')->withTimestamps();
+    }
 }
