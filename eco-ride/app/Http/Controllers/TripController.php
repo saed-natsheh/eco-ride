@@ -59,4 +59,33 @@ class TripController extends Controller
 
         return redirect('driver/dashboard')->with('success', 'Trip created successfully!');
     }
+
+
+    public function startTrip($id)
+    {
+        $trip = Trip::where('user_id', auth()->id())->findOrFail($id);
+
+        if ($trip->status !== 'pending') {
+            return back()->with('error', 'Trip already started or completed.');
+        }
+
+        $trip->status = 'started';
+        $trip->save();
+
+        return back()->with('success', 'Trip started.');
+    }
+
+    public function endTrip($id)
+    {
+        $trip = Trip::where('user_id', auth()->id())->findOrFail($id);
+
+        if ($trip->status !== 'started') {
+            return back()->with('error', 'Trip must be started before it can be completed.');
+        }
+
+        $trip->status = 'completed';
+        $trip->save();
+
+        return back()->with('success', 'Trip marked as completed. Waiting for participant feedback.');
+    }
 }

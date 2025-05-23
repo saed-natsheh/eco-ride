@@ -33,6 +33,20 @@
                         <td>€{{ $trip->price }}</td>
                         <td>{{ $trip->available_seats }}</td>
                         <td>{{ $trip->is_eco ? 'Yes' : 'No' }}</td>
+                        <td>
+                            {{ ucfirst($trip->status) }}
+                            @if($trip->status === 'pending')
+                                <form method="POST" action="{{ route('trips.start', $trip->id) }}">
+                                    @csrf
+                                    <button class="btn btn-sm btn-warning mt-1">Start Trip</button>
+                                </form>
+                            @elseif($trip->status === 'started')
+                                <form method="POST" action="{{ route('trips.end', $trip->id) }}">
+                                    @csrf
+                                    <button class="btn btn-sm btn-danger mt-1">End Trip</button>
+                                </form>
+                            @endif
+                        </td>
                     </tr>
                 @empty
                     <tr>

@@ -17,10 +17,11 @@ Route::post('/register-onboarding', [UserController::class, 'storeWithOnboarding
 
 Route::prefix('driver')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('driver.logout')->middleware('auth');
-
     Route::get('/login', [AuthController::class, 'showDriverLogin'])->name('driver.login');
     Route::post('/login', [AuthController::class, 'driverLogin']);
     Route::middleware(['auth', 'driver'])->group(function () {
+        Route::post('/trips/{id}/start', [TripController::class, 'startTrip'])->name('trips.start');
+        Route::post('/trips/{id}/end', [TripController::class, 'endTrip'])->name('trips.end');
         Route::get('/dashboard', [TripController::class, 'dashboard'])->name('driver.dashboard');
         Route::get('/trips/create', [TripController::class, 'create']);
         Route::post('/trips', [TripController::class, 'store']);
@@ -40,13 +41,16 @@ Route::prefix('admin')->group(function () {
 Route::post('/admin/create-employee', [AdminDashboardController::class, 'createEmployee'])->middleware(['auth', 'admin']);
 Route::post('/admin/suspend/{id}', [AdminDashboardController::class, 'Suspend'])->middleware(['auth', 'admin']);
 
-
 //user
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::get('/carpools', [CarpoolController::class, 'index'])->name('carpools.index');
 Route::get('/trip/{id}', [TripViewController::class, 'show'])->name('trip.show');
 Route::post('/trip/{id}/join', [TripViewController::class, 'join'])->middleware('auth')->name('trip.join');
+Route::post('/trip/{id}/feedback', [TripViewController::class, 'submitFeedback'])->middleware('auth');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -54,7 +58,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/', action: [HomeController::class, 'index']);
-Route::get('/login', [AuthController::class, 'showLoginForm']);
+
 
 Route::get('/carpool', action: [TripController::class, 'index']);
 Route::get('/carpool/details', action: [TripController::class, 'show']);

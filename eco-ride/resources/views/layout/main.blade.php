@@ -59,18 +59,29 @@
                             <a href="{{ url('/') }}" class="nav-link mx-2">Page d'accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/carpool') }}" class="nav-link mx-2">Covoiturages</a>
+                            <a href="{{ url('/carpools') }}" class="nav-link mx-2">Covoiturages</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/login') }}" class="nav-link mx-2">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link mx-2">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/register-onboarding') }}" class="nav-link mx-2">immatriculation du
-                                conducteur</a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{ url('/dashboard') }}" class="nav-link mx-2">
+                                    Bonjour, {{ auth()->user()->name }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="btn btn-link nav-link mx-2">Se déconnecter</button>
+                                </form>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ url('/login') }}" class="nav-link mx-2">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/register-onboarding') }}" class="nav-link mx-2">immatriculation du
+                                    conducteur</a>
+                            </li>
+                        @endauth
                     </ul>
                 </div>
             </nav>

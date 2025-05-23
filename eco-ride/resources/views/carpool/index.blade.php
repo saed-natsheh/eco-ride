@@ -3,7 +3,7 @@
 
 @section('content')
     <section id="search">
-        <div class="container py-5 card mb-4 mt-4">
+        <div class="container card py-5 mb-4 mt-4">
             <h2 class="mb-4 text-center ecoride-color">trouver du covoiturage</h2>
             <form class="row g-3 justify-content-center" method="GET" action="{{ route('carpools.index') }}">
                 <div class="col-md-4">
@@ -27,7 +27,7 @@
 
     <div class="container-fluid py-5">
         <div class="row">
-            <!-- Sidebar Filters -->
+
             <div class="col-md-3">
                 <div class="card shadow-sm mb-4">
                     <div class="card-header bg-success text-white">

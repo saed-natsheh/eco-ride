@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
     public function registerWithOnboarding()
     {
         return view('driver.onboarding');
@@ -32,18 +32,14 @@ class UserController extends Controller
             'energy_type' => 'required_if:role,driver,both',
             'capacity' => 'required_if:role,driver,both|integer|min:1',
         ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
-            'credits' => 20,
+            'credits' => 0,
         ]);
-
-        // Optional login after register
         Auth::login($user);
-
         if (in_array($request->role, ['driver', 'both'])) {
             $vehicle = new Vehicle($request->only([
                 'license_plate',
@@ -55,7 +51,6 @@ class UserController extends Controller
             ]));
             $vehicle->user_id = $user->id;
             $vehicle->save();
-
             $prefs = new DriverPreference([
                 'smoking' => $request->boolean('smoking'),
                 'pets' => $request->boolean('pets'),

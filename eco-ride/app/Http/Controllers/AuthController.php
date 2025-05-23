@@ -53,6 +53,25 @@ class AuthController extends Controller
     }
 
 
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+
+            return redirect('/dashboard')->with('success', 'Welcome back!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ])->withInput();
+    }
+
+
     public function register(Request $request)
     {
         $request->validate([
@@ -65,8 +84,8 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user', // default role
-            'credits' => 20, // US 7: new users receive 20 credits
+            'role' => 'user',
+            'credits' => 20,
         ]);
 
         Auth::login($user);

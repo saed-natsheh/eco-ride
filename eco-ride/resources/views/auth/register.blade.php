@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header ecoride-btn">
                         <h4>Create Account</h4>
                     </div>
                     <div class="card-body">
@@ -42,7 +42,7 @@
                                 <input type="password" name="password_confirmation" class="form-control" required>
                             </div>
 
-                            <button class="btn btn-primary w-100">Register</button>
+                            <button class="btn ecoride-btn w-100">Register</button>
                         </form>
 
                         <div class="text-center mt-3">
