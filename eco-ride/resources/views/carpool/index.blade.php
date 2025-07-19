@@ -82,7 +82,7 @@
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex justify-content-between align-items-center">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ asset('assets/img/driver.png') }}" class="rounded-circle me-3" width="60"
+                                        <img src="{{ asset('assets/img/driver.png') }}"  class="rounded-circle me-3" width="60"
                                             height="60">
                                         <div>
                                             <h6>{{ $trip->user->name }}</h6>
