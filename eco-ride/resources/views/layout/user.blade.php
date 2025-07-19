@@ -35,11 +35,11 @@
         <div class="sidebar p-3">
             <h4 class="mb-4">EcoRide</h4>
             <p>Hello, {{ Auth::user()->name }}</p>
-            <a href="{{ route('user.dashboard') }}">Dashboard</a>
-            <a href="{{ url('/carpools') }}">Join New Trip</a>
+            <a href="{{ route('user.dashboard') }}">Tableau de bord</a>
+            <a href="{{ url('/carpools') }}">Rejoignez un nouveau voyage</a>
             <form action="{{ route('logout') }}" method="POST" class="mt-3">
                 @csrf
-                <button class="btn btn-light w-100">Logout</button>
+                <button class="btn btn-light w-100">Déconnexion</button>
             </form>
         </div>
 
